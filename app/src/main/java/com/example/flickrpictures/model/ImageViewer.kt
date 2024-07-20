@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flickrpictures.data.Image
 import com.squareup.picasso.Picasso
@@ -28,11 +29,13 @@ class ImageViewer(val images: MutableList<Image> = mutableListOf()): RecyclerVie
     }
     inner class ImageHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(photo: Image) {
+            val selectedView = itemView
             Picasso.get().load(photo.url)
                 .resize(imageSize, imageSize)
                 .centerCrop()
-                .into(itemView.findViewById<ImageView>(R.id.imageView)!!)
-
+                .into(selectedView.findViewById<ImageView>(R.id.imageView)!!)
+            selectedView.findViewById<TextView>(R.id.userNameView).text = photo.userID
+            selectedView.findViewById<TextView>(R.id.picTags).text = photo.imageTags
         }
     }
 }

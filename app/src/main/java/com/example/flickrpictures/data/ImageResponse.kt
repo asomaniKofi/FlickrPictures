@@ -8,6 +8,9 @@ data class FoundUserResponse (
     val profile: User
 )
 
+data class FoundTagResponse (
+    val photo:TagResponse
+)
 
 data class User (
     val id: String,
@@ -43,9 +46,25 @@ data class ImageResponse(
     val title: String
 )
 
+data class TagResponse(
+    val id:String,
+    val tags: Tag
+)
+
+data class Tag (
+    val tag: List<TagInfo>
+)
+data class TagInfo (
+    val id:String,
+    val author:String,
+    val authorname:String,
+    val raw:String,
+    val _content:String,
+)
 data class Image(
     val id:String,
     val url:String,
     val title: String,
-    val user: User
+    val userID: String,
+    val imageTags: String
 )

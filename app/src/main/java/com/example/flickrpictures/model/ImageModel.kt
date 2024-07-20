@@ -20,12 +20,22 @@ class ImageModel: ViewModel() {
 
         return response.photos.photo.map { image ->
             Log.d("Response", "$image")
-            val selectedUser = WebClient.client.fetchUser(image.owner).profile
+            //val selectedUser = WebClient.client.fetchUser(image.owner).profile
+//            Log.d("Tag Response", WebClient.client.fetchTags(image.id).toString())
+            val photoTags = WebClient.client.fetchTags(image.id)
+            var tags = ""
+            for(tag in photoTags.photo.tags.tag){
+                tags += tag.raw
+                tags += ", "
+            }
+            //selectedUser
+            //photoTags
             Image(
                 id = image.id,
                 url = "https://farm${image.farm}.staticflickr.com/${image.server}/${image.id}_${image.secret}.jpg",
                 title = image.title,
-                user = selectedUser
+                userID = image.owner,
+                imageTags = tags
             )
         }
     }
