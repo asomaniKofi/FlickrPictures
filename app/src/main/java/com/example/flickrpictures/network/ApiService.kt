@@ -4,10 +4,13 @@ import com.example.flickrpictures.data.ImageSearchResponse
 import com.example.flickrpictures.BuildConfig
 import com.example.flickrpictures.data.FoundUserResponse
 import com.example.flickrpictures.data.FoundTagResponse
+import com.example.flickrpictures.data.FoundImageDetails
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
+    @GET("?method=flickr.photos.getInfo&format=json&nojsoncallback=1&api_key=${BuildConfig.FLICKR_API_KEY}")
+    suspend fun fetchDetails(@Query(value = "photo_id") photoID:String): FoundImageDetails
     @GET("?method=flickr.tags.getListPhoto&format=json&nojsoncallback=1&api_key=${BuildConfig.FLICKR_API_KEY}")
     suspend fun fetchTags(@Query(value = "photo_id") photoID:String): FoundTagResponse
     @GET("?method=flickr.profile.getProfile&format=json&nojsoncallback=1&api_key=${BuildConfig.FLICKR_API_KEY}")

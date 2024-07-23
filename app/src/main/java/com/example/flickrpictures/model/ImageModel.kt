@@ -8,9 +8,12 @@ import com.example.flickrpictures.data.Image
 import com.example.flickrpictures.network.WebClient
 import kotlinx.coroutines.launch
 import androidx.lifecycle.viewModelScope
+import com.example.flickrpictures.data.FoundImageDetails
 
 class ImageModel: ViewModel() {
-
+    suspend fun fetchImageDetails(photoID:String): FoundImageDetails {
+        return WebClient.client.fetchDetails(photoID)
+    }
     suspend fun fetchImages(searchParam:String): List<Image> {
         if(searchParam.isBlank()){
             return emptyList()
@@ -19,17 +22,12 @@ class ImageModel: ViewModel() {
         val response = WebClient.client.fetchImages(searchParam)
 
         return response.photos.photo.map { image ->
-            Log.d("Response", "$image")
-            //val selectedUser = WebClient.client.fetchUser(image.owner).profile
-//            Log.d("Tag Response", WebClient.client.fetchTags(image.id).toString())
             val photoTags = WebClient.client.fetchTags(image.id)
             var tags = ""
             for(tag in photoTags.photo.tags.tag){
                 tags += tag.raw
                 tags += ", "
             }
-            //selectedUser
-            //photoTags
             Image(
                 id = image.id,
                 url = "https://farm${image.farm}.staticflickr.com/${image.server}/${image.id}_${image.secret}.jpg",

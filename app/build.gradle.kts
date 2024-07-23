@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
 }
 
+
+
 android {
     namespace = "com.example.flickrpictures"
     compileSdk = 34
@@ -49,7 +51,7 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.fasttablelayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

@@ -15,8 +15,10 @@ lifecycleViewmodelKtx = "2.2.0"
 activityKtx = "1.1.0"
 recyclerview = "1.1.0"
 flickr4java = "3.0.9"
+fasttablelayout = "1.0.0"
 
 [libraries]
+fasttablelayout = {group = "com.github.alcarazolabs", name="fasttablelayout", version.ref = "fasttablelayout"}
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
